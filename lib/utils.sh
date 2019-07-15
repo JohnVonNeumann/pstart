@@ -17,7 +17,7 @@
 #      REVISION:  ---
 #===============================================================================
 
-set -o posix    # keep the codebase standard
+# set -o posix    # keep the codebase standard
 set -o pipefail     # if a pipe stage fails, throw errors
 set -o nounset  # treat unset variables as an error
 
@@ -33,10 +33,10 @@ set -o nounset  # treat unset variables as an error
 #   3 - File is not empty.
 #   4 - Input must be a file.
 #######################################
-_file_integrity_check()
+utils::file_integrity_check()
 {
-  if [ -f $1 ]; then
-    if [ -s $1 ]; then
+  if [ -f "$1" ]; then
+    if [ -s "$1" ]; then
       echo "File is not empty."
       exit 3
     else
