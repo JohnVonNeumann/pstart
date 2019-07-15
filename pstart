@@ -13,6 +13,7 @@
 #         NOTES: ---
 #        AUTHOR: JOHNVONNEUMANN
 #===============================================================================
+source "lib/utils.sh"
 
 set -o posix    # keep the codebase standard
 set -o pipefail     # if a pipe stage fails, throw errors
@@ -29,13 +30,15 @@ create_gitignore ()
   touch $file
   # ensure no race conditions
   # validate file is empty && write entries into it
-  if [ -s "$file" ]; then
-    echo "Newly created file is not empty. Possible race condition. Exiting."
-    exit 3
-  else
-    for each in $ignores; do
-      echo $each >> $file;
+  local retcode=$(utils::file_integrity_check "$file")
+  if [ "$retcode" -eq "0" -s "$file" ]; then
+    for ignore in "$ignores"; do
+      echo "$ignore" >> "$file";
     done
+    exit 0
+  else
+    echo "throw error"
+    exit "$retcode"
   fi
 }
 
