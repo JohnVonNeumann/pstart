@@ -20,3 +20,10 @@ https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/autocon
 
 # Great little blog post on the use of the autotools project
 https://thoughtbot.com/blog/the-magic-behind-configure-make-make-install
+
+#### Make Commands
+
+| command | description |
+| ------- | ----------- |
+| setup_git_hooks | Creates all your git hooks from templates provided in the `hooks` directory |
+| install  | Perform all "pre-use" actions required for effective use of the project |
