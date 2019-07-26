@@ -1,6 +1,5 @@
 # pstart
 
-
 Fixes for small bugs encountered.
 Problem: `bats-core` has a method for calling tests, and sourcing a file, which
 then source another file as part of its dependencies, breaks the files.
@@ -10,11 +9,11 @@ OS's would encounter issues.
 Implementation Details: Create a `makefile` rule that will run an `install` of the
 `/lib/*.sh` files in the repository, and install them into `/usr/lib`, so that the
 root binary can source them regardless of where it is called from, whether
-through the main binary, or throught the test suite.
+through the main binary, or through the test suite.
 
 The best possible approach could be to utilise something along the lines of the
 autotools project, with a `configure` and `make` style process similar to that of
-old school projects, providing a tonne of exisiting automation functionality.
+old school projects, providing a tonne of existing automation functionality.
 
 https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/autoconf.html
 
