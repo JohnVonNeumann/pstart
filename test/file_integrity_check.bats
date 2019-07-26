@@ -1,4 +1,4 @@
-source ../lib/utils.sh
+source /usr/local/lib/pstart/utils.sh
 
 @test "function with correct file returns 0" {
   cd /tmp
