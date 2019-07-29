@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/bash
 #===============================================================================
 #
 #          FILE: utils.sh
@@ -19,7 +19,7 @@
 
 # set -o posix    # keep the codebase standard
 set -o pipefail     # if a pipe stage fails, throw errors
-set -o nounset  # treat unset variables as an error
+# set -o nounset  # treat unset variables as an error
 
 #######################################
 # Perform an integrity check on a file to mitigate the chances of race
@@ -35,15 +35,20 @@ set -o nounset  # treat unset variables as an error
 #######################################
 utils::file_integrity_check()
 {
-  if [ -f "$1" ]; then
-    if [ -s "$1" ]; then
-      echo "File is not empty."
-      exit 3
-    else
-      exit 0
-    fi
-  else
-    echo "Error: Input must be a file."
+  if [ -z "$1" ]; then
+    echo "Error: Input cannot be empty."
     exit 4
+  else
+    if [ -f "$1" ]; then
+      if [ -s "$1" ]; then
+        echo "File is not empty."
+        exit 3
+      else
+        exit 0
+      fi
+    else
+      echo "Error: Input must be a file."
+      exit 4
+    fi
   fi
 }
