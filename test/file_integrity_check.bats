@@ -1,6 +1,6 @@
 source /usr/local/lib/pstart/utils.sh
 
-@test "function response with no file" {
+@test "function response with no input" {
   run utils::file_integrity_check
   [ "$status" -ne 0 ]
   [ "$output" = "Error: Input cannot be empty." ]
@@ -14,3 +14,8 @@ source /usr/local/lib/pstart/utils.sh
   [ "$status" -eq 0 ]
 }
 
+@test "function response with numeric input" {
+  run utils::file_integrity_check 019
+  [ "$status" -ne 0 ]
+  [ "$output" = "Error: Input must be a file." ]
+}
