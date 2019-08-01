@@ -35,16 +35,14 @@ set -o pipefail     # if a pipe stage fails, throw errors
 #######################################
 utils::file_integrity_check()
 {
-  if [ -z "$1" ]; then
-    echo "Error: Input cannot be empty." >&2
-    exit 4
+  if [[ $# -ne 1 ]]; then
+    echo "Error: Incorrect number of arguments." >&2
+    exit 5
   else
     if [ -f "$1" ]; then
       if [ -s "$1" ]; then
         echo "File is not empty." >&2
         exit 3
-      else
-        exit 0
       fi
     else
       echo "Error: Input must be a file." >&2
