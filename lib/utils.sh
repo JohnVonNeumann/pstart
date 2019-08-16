@@ -17,9 +17,7 @@
 #      REVISION:  ---
 #===============================================================================
 
-# set -o posix    # keep the codebase standard
 set -o pipefail     # if a pipe stage fails, throw errors
-# set -o nounset  # treat unset variables as an error
 
 #######################################
 # Perform an integrity check on a file to mitigate the chances of race
@@ -35,17 +33,18 @@ set -o pipefail     # if a pipe stage fails, throw errors
 #######################################
 utils::file_integrity_check()
 {
+  local file=$1
   if [[ $# -ne 1 ]]; then
     echo "Error: Incorrect number of arguments." >&2
     exit 5
   else
-    if [ -f "$1" ]; then
-      if [ -s "$1" ]; then
-        echo "File is not empty." >&2
+    if [ -f "$file" ]; then
+      if [ -s "$file" ]; then
+        echo "Error: $file is not empty." >&2
         exit 3
       fi
     else
-      echo "Error: Input must be a file." >&2
+      echo "Error: $file does not exist." >&2
       exit 4
     fi
   fi
