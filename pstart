@@ -69,4 +69,3 @@ create_test_directory () {
 }
 
 # do some arg parsing so you can run a "--all" to run all of them, etc
-create_gitignore
