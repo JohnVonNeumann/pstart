@@ -24,19 +24,19 @@ set -o noclobber    # don't allow overwriting of files with io redirection
 ## make sure it's easy to add in more ignores
 create_gitignore ()
 {
-  local ignores=[".DS_store",".terraform", "*.state"]
+  declare -a ignores=(".DS_store" ".terraform" "*.state")
   local file=".gitignore"
   touch $file
   # ensure no race conditions
   # validate file is empty && write entries into it
-  local retcode=$(utils::file_integrity_check "$file")
-  if [ "$retcode" -eq "0" -s "$file" ]; then
-    for ignore in "$ignores"; do
+  utils::file_integrity_check "$file"
+  local retcode=$?
+  if [ $retcode -eq 0 ]; then
+    for ignore in "${ignores[@]}"; do
       echo "$ignore" >> "$file";
     done
-    exit 0
   else
-    echo "throw error"
+    echo "throw error" >&2
     exit "$retcode"
   fi
 }
