@@ -13,7 +13,7 @@
 #         NOTES: ---
 #        AUTHOR: JOHNVONNEUMANN
 #===============================================================================
-source "lib/utils.sh"
+source /usr/local/lib/pstart/utils.sh
 
 set -o posix    # keep the codebase standard
 set -o pipefail     # if a pipe stage fails, throw errors
