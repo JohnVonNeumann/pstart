@@ -18,6 +18,13 @@ source /usr/local/lib/pstart/utils.sh
 set -o pipefail     # if a pipe stage fails, throw errors
 set -o noclobber    # don't allow overwriting of files with io redirection
 
+show_help ()
+{
+  echo "Usage: pstart [OPTION...]"
+
+  exit 0
+}
+
 # Create gitignore file
 ## have list of common ignores
 ## ds_store, tags.lock
@@ -69,3 +76,11 @@ create_test_directory () {
 }
 
 # do some arg parsing so you can run a "--all" to run all of them, etc
+while getopts "h?" opt; do
+    case "$opt" in
+    h|\?)
+        show_help
+        exit 0
+        ;;
+    esac
+done
