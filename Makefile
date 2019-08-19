@@ -21,4 +21,8 @@ setup_git_hooks:
 # Environmental Variables:
 # 	LIB_DIR: The path of the directory we wish to keep our `lib` files in.
 install:
-	mkdir $(LIB_DIR) && cp lib/utils.sh $(LIB_DIR)
+	if [ ! -d $(LIB_DIR) ]; then \
+		mkdir $(LIB_DIR) && cp lib/utils.sh $(LIB_DIR); \
+    else \
+		cp lib/utils.sh $(LIB_DIR); \
+    fi
